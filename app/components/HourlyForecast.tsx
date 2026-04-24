@@ -136,7 +136,7 @@ export default function HourlyForecast({ data, loading }: HourlyForecastProps) {
         {hours.map((item: any, index: number) => (
           <div
             key={index}
-            className={`flex items-center justify-between py-5 px-5 rounded-[20px] bg-brand-dark/40 border border-brand-border/20 flex-1 ${isDataLoading ? "animate-pulse opacity-40" : ""}`}
+            className={`flex items-center justify-between py-4 px-5 rounded-[20px] bg-brand-dark/40 border border-brand-border/20 flex-1 ${isDataLoading ? "animate-pulse opacity-40" : ""}`}
           >
             {isDataLoading || !item ? (
               <div className="w-full h-8 bg-brand-muted/10 rounded-lg" />

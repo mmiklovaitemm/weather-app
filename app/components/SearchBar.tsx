@@ -16,7 +16,7 @@ export default function SearchBar({
 }: SearchBarProps) {
   const [query, setQuery] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [isUserSearching, setIsUserSearching] = useState(false); // Naujas flag'as
+  const [isUserSearching, setIsUserSearching] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const suggestions = ["London", "New York", "Tokyo", "Paris"];
@@ -114,7 +114,6 @@ export default function SearchBar({
 
       <div className="w-full max-w-[700px] relative">
         <AnimatePresence mode="wait">
-          {/* Rodyti tik tada, kai vartotojas paspaudė paiešką */}
           {loading && isUserSearching ? (
             <motion.div
               key="loading-dropdown"

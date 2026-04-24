@@ -111,40 +111,38 @@ export default function Home() {
       />
 
       <AnimatePresence mode="wait">
-        {weatherData && (
-          <motion.div
-            key="content"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch"
-          >
-            <div className="col-span-1 lg:col-span-8 flex flex-col gap-8">
-              <motion.div variants={itemVariants}>
-                <CurrentWeather data={weatherData?.current} loading={loading} />
-              </motion.div>
-
-              <motion.div variants={itemVariants}>
-                <WeatherDetails
-                  data={weatherData?.current}
-                  unit={unit}
-                  loading={loading}
-                />
-              </motion.div>
-
-              <motion.div variants={itemVariants}>
-                <DailyForecast data={weatherData?.forecast} loading={loading} />
-              </motion.div>
-            </div>
-
-            <motion.div
-              variants={itemVariants}
-              className="col-span-1 lg:col-span-4"
-            >
-              <HourlyForecast data={weatherData?.forecast} loading={loading} />
+        <motion.div
+          key="content"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch"
+        >
+          <div className="col-span-1 lg:col-span-8 flex flex-col gap-8">
+            <motion.div variants={itemVariants}>
+              <CurrentWeather data={weatherData?.current} loading={loading} />
             </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <WeatherDetails
+                data={weatherData?.current}
+                unit={unit}
+                loading={loading}
+              />
+            </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <DailyForecast data={weatherData?.forecast} loading={loading} />
+            </motion.div>
+          </div>
+
+          <motion.div
+            variants={itemVariants}
+            className="col-span-1 lg:col-span-4"
+          >
+            <HourlyForecast data={weatherData?.forecast} loading={loading} />
           </motion.div>
-        )}
+        </motion.div>
       </AnimatePresence>
     </main>
   );
