@@ -86,7 +86,7 @@ export default function Home() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.1,
       },
     },
   };
@@ -107,22 +107,7 @@ export default function Home() {
       <SearchBar onSearch={(city) => handleSearch(city)} />
 
       <AnimatePresence mode="wait">
-        {loading ? (
-          <motion.div
-            key="loader"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="flex justify-center py-20 text-brand-white"
-          >
-            <div className="flex flex-col items-center gap-4 text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-brand-blue"></div>
-              <p className="font-medium opacity-70 px-4">
-                Detecting location and fetching weather...
-              </p>
-            </div>
-          </motion.div>
-        ) : error ? (
+        {error ? (
           <motion.div
             key="error"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -145,27 +130,29 @@ export default function Home() {
             animate="visible"
             className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch"
           >
-            {/* Left side on desktop, top on mobile */}
             <div className="col-span-1 lg:col-span-8 flex flex-col gap-8">
               <motion.div variants={itemVariants}>
-                <CurrentWeather data={weatherData.current} />
+                <CurrentWeather data={weatherData?.current} loading={loading} />
               </motion.div>
 
               <motion.div variants={itemVariants}>
-                <WeatherDetails data={weatherData.current} unit={unit} />
+                <WeatherDetails
+                  data={weatherData?.current}
+                  unit={unit}
+                  loading={loading}
+                />
               </motion.div>
 
               <motion.div variants={itemVariants}>
-                <DailyForecast data={weatherData.forecast} />
+                <DailyForecast data={weatherData?.forecast} loading={loading} />
               </motion.div>
             </div>
 
-            {/* Right side on desktop, bottom on mobile */}
             <motion.div
               variants={itemVariants}
               className="col-span-1 lg:col-span-4"
             >
-              <HourlyForecast data={weatherData.forecast} />
+              <HourlyForecast data={weatherData?.forecast} loading={loading} />
             </motion.div>
           </motion.div>
         )}

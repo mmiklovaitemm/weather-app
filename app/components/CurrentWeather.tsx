@@ -1,12 +1,28 @@
-// app/components/CurrentWeather.tsx
+"use client";
 
 interface CurrentWeatherProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any;
+  loading?: boolean;
 }
 
-export default function CurrentWeather({ data }: CurrentWeatherProps) {
-  if (!data) return null;
+export default function CurrentWeather({ data, loading }: CurrentWeatherProps) {
+  if (loading || !data) {
+    return (
+      <section className="relative overflow-hidden bg-brand-card border border-brand-border rounded-[32px] p-8 md:p-10 min-h-[280px] md:min-h-[320px] flex items-center justify-center w-full shadow-xl">
+        <div className="flex flex-col items-center gap-4">
+          <img
+            src="/weather-app/images/icon-loading.svg"
+            alt="Loading..."
+            className="w-12 h-12 animate-spin"
+          />
+          <span className="text-brand-muted font-medium text-sm animate-pulse">
+            Loading...
+          </span>
+        </div>
+      </section>
+    );
+  }
 
   const today = new Date().toLocaleDateString("en-US", {
     weekday: "long",
@@ -39,13 +55,12 @@ export default function CurrentWeather({ data }: CurrentWeatherProps) {
   const weatherIcon = getWeatherIcon(data.weather[0].main);
 
   return (
-    <section className="relative overflow-hidden bg-brand-blue rounded-[32px] p-8 md:p-10 text-brand-white min-h-[280px] md:min-h-[320px] flex items-center shadow-xl w-full max-w-full">
+    <section className="relative overflow-hidden bg-brand-blue rounded-[32px] p-8 md:p-10 text-brand-white min-h-[280px] md:min-h-[320px] flex items-center shadow-xl w-full">
       <img
         src="/weather-app/images/bg-today-large.svg"
         alt=""
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
       />
-
       <div className="relative z-10 w-full flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-6 md:gap-0 px-2">
         <div className="flex flex-col gap-1">
           <h2 className="font-heading text-2xl md:text-3xl font-bold">
@@ -53,7 +68,6 @@ export default function CurrentWeather({ data }: CurrentWeatherProps) {
           </h2>
           <p className="text-sm md:text-base opacity-80">{today}</p>
         </div>
-
         <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
           <img
             src={weatherIcon}
