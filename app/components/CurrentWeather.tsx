@@ -41,7 +41,7 @@ export default function CurrentWeather({ data }: CurrentWeatherProps) {
   return (
     <section className="relative overflow-hidden bg-brand-blue rounded-[32px] p-8 md:p-10 text-brand-white min-h-[280px] md:min-h-[320px] flex items-center shadow-xl w-full max-w-full">
       <img
-        src="/images/bg-today-large.svg"
+        src="/weather-app/images/bg-today-large.svg"
         alt=""
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
       />

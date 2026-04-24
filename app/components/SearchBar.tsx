@@ -41,7 +41,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
             className="w-full bg-brand-card border border-brand-border rounded-2xl py-3 px-10 md:py-4 md:px-14 focus:outline-none focus:border-brand-blue transition-all placeholder:text-brand-muted text-base md:text-lg text-brand-white shadow-inner"
           />
           <img
-            src="/images/icon-search.svg"
+            src="/weather-app/images/icon-search.svg"
             alt=""
             className="absolute left-3 md:left-5 top-1/2 -translate-y-1/2 w-5 h-5 md:w-6 md:h-6 opacity-40 group-focus-within:opacity-100 transition-opacity"
           />

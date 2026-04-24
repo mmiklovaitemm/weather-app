@@ -22,7 +22,7 @@ export default function Header({ unit, onUnitChange }: HeaderProps) {
       <div className="flex justify-between items-center w-full relative">
         <div className="flex items-center gap-3">
           <img
-            src="/images/logo.svg"
+            src="/weather-app/images/logo.svg"
             alt="Weather Now Logo"
             className="w-40 h-8 md:w-60 md:h-10 object-contain"
           />
@@ -37,7 +37,7 @@ export default function Header({ unit, onUnitChange }: HeaderProps) {
             className="flex items-center gap-2 bg-brand-card border border-brand-border px-4 py-2 md:px-5 md:py-2.5 rounded-2xl hover:border-brand-blue transition-colors group"
           >
             <img
-              src="/images/icon-units.svg"
+              src="/weather-app/images/icon-units.svg"
               alt=""
               className="w-4 h-4 md:w-5 md:h-5 opacity-70 group-hover:opacity-100 transition-opacity"
             />
@@ -46,7 +46,7 @@ export default function Header({ unit, onUnitChange }: HeaderProps) {
             </span>
             <motion.img
               animate={{ rotate: isOpen ? 180 : 0 }}
-              src="/images/icon-dropdown.svg"
+              src="/weather-app/images/icon-dropdown.svg"
               alt=""
               className="w-2.5 h-2.5 md:w-3 md:h-3 ml-1"
             />
@@ -92,7 +92,7 @@ export default function Header({ unit, onUnitChange }: HeaderProps) {
                         <motion.img
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
-                          src="/images/icon-checkmark.svg"
+                          src="/weather-app/images/icon-checkmark.svg"
                           alt=""
                           className="w-4 h-4"
                         />
@@ -111,7 +111,7 @@ export default function Header({ unit, onUnitChange }: HeaderProps) {
                         <motion.img
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
-                          src="/images/icon-checkmark.svg"
+                          src="/weather-app/images/icon-checkmark.svg"
                           alt=""
                           className="w-4 h-4"
                         />
@@ -141,7 +141,7 @@ export default function Header({ unit, onUnitChange }: HeaderProps) {
                         <motion.img
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
-                          src="/images/icon-checkmark.svg"
+                          src="/weather-app/images/icon-checkmark.svg"
                           alt=""
                           className="w-4 h-4"
                         />
@@ -160,7 +160,7 @@ export default function Header({ unit, onUnitChange }: HeaderProps) {
                         <motion.img
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
-                          src="/images/icon-checkmark.svg"
+                          src="/weather-app/images/icon-checkmark.svg"
                           alt=""
                           className="w-4 h-4"
                         />
