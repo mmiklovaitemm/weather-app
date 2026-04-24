@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  /* colors */
+  --color-brand-dark: hsl(243, 96%, 9%);
+  --color-brand-card: hsl(243, 27%, 20%);
+  --color-brand-border: hsl(243, 23%, 30%);
+  --color-brand-muted: hsl(240, 6%, 70%);
+  --color-brand-white: hsl(0, 0%, 100%);
+  --color-brand-blue: hsl(233, 67%, 56%);
+  --color-brand-blue-dark: hsl(248, 70%, 36%);
+  --color-brand-orange: hsl(28, 100%, 52%);
+
+  /* fonts */
+  --font-sans: var(--font-dm-sans);
+  --font-heading: var(--font-bricolage);
+}
+
+@layer base {
+  body {
+    @apply bg-brand-dark text-brand-white min-h-screen;
+  }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: hsl(243, 23%, 30%);
+  border-radius: 10px;
+}
