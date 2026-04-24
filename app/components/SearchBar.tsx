@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface SearchBarProps {
   onSearch: (city: string) => void;
+  loading?: boolean;
 }
 
-export default function SearchBar({ onSearch }: SearchBarProps) {
+export default function SearchBar({ onSearch, loading }: SearchBarProps) {
   const [query, setQuery] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -16,7 +17,6 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
 
     if (trimmedQuery) {
       onSearch(trimmedQuery);
-
       if (document.activeElement instanceof HTMLElement) {
         document.activeElement.blur();
       }
@@ -24,7 +24,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
   };
 
   return (
-    <section className="flex justify-center w-full px-1">
+    <section className="flex flex-col items-center w-full px-1 relative z-50">
       <motion.form
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -51,11 +51,35 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
           whileHover={{ scale: 1.05, backgroundColor: "#3b82f6" }}
           whileTap={{ scale: 0.95 }}
           type="submit"
-          className="bg-brand-blue text-brand-white px-6 md:px-10 py-3 md:py-4 rounded-2xl font-bold text-base md:text-lg transition-all shadow-lg shadow-brand-blue/20"
+          disabled={loading}
+          className={`bg-brand-blue text-brand-white px-6 md:px-10 py-3 md:py-4 rounded-2xl font-bold text-base md:text-lg transition-all shadow-lg shadow-brand-blue/20 ${
+            loading ? "opacity-70 cursor-not-allowed" : ""
+          }`}
         >
           Search
         </motion.button>
       </motion.form>
+
+      {/* SEARCH IN PROGRESS DROPDOWN  */}
+      <AnimatePresence>
+        {loading && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="absolute top-[100%] mt-2 w-full max-w-[700px] bg-[#21212c] border border-brand-border rounded-xl p-3 flex items-center gap-3 shadow-2xl"
+          >
+            <img
+              src="/weather-app/images/icon-loading.svg"
+              alt=""
+              className="w-5 h-5 animate-spin"
+            />
+            <span className="text-brand-white text-sm font-medium">
+              Search in progress
+            </span>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

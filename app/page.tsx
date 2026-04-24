@@ -104,7 +104,7 @@ export default function Home() {
     <main className="max-w-[1280px] mx-auto px-4 md:px-6 py-6 md:py-10 flex flex-col gap-8 md:gap-10 overflow-x-hidden">
       <Header unit={unit} onUnitChange={toggleUnit} />
 
-      <SearchBar onSearch={(city) => handleSearch(city)} />
+      <SearchBar onSearch={(city) => handleSearch(city)} loading={loading} />
 
       <AnimatePresence mode="wait">
         {error ? (
