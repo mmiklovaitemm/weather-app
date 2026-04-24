@@ -13,9 +13,9 @@ A sleek, responsive, and highly interactive weather application built with **Nex
 * **Interactive Hourly Forecast:** A unique day-selector allows you to view hourly weather predictions for every day of the week.
 * **5-Day Daily Forecast:** High and low temperatures for the upcoming week at a glance.
 * **Unit Switching:** Seamlessly toggle between **Metric** (Celsius, m/s, mm) and **Imperial** (Fahrenheit, mph, inches) systems.
-* **Stunning UI/UX:** Features custom-designed glassmorphism cards, smooth Framer Motion animations, and specialized weather icons.
-* **Robust Error Handling:** Custom "No results found" and full-screen API error states with retry functionality.
-* **Skeleton Loaders:** Professional loading states (skeletons) ensure a smooth visual experience while data is being fetched.
+* **UI/UX:** Features custom-designed glassmorphism cards, smooth Framer Motion animations, and specialized weather icons.
+* **Error Handling:** Custom "No results found" and full-screen API error states with retry functionality.
+* **Loaders:** Professional loading states (skeletons) ensure a smooth visual experience while data is being fetched.
 
 ---
 
