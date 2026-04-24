@@ -59,7 +59,7 @@ export default function DailyForecast({ data }: DailyForecastProps) {
               {item.day}
             </span>
             <img
-              src={`/images/${item.icon}`}
+              src={`/weather-app/images/${item.icon}`}
               alt={item.description}
               className="w-10 h-10 md:w-12 md:h-12 drop-shadow-md group-hover:scale-110 transition-transform"
               title={item.description}

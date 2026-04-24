@@ -20,19 +20,19 @@ export default function CurrentWeather({ data }: CurrentWeatherProps) {
   const getWeatherIcon = (main: string) => {
     switch (main.toLowerCase()) {
       case "clouds":
-        return "/images/icon-partly-cloudy.webp";
+        return "/weather-app/images/icon-partly-cloudy.webp";
       case "rain":
-        return "/images/icon-rain.webp";
+        return "/weather-app/images/icon-rain.webp";
       case "snow":
-        return "/images/icon-snow.webp";
+        return "/weather-app/images/icon-snow.webp";
       case "clear":
-        return "/images/icon-sunny.webp";
+        return "/weather-app/images/icon-sunny.webp";
       case "thunderstorm":
-        return "/images/icon-storm.webp";
+        return "/weather-app/images/icon-storm.webp";
       case "drizzle":
-        return "/images/icon-rain.webp";
+        return "/weather-app/images/icon-rain.webp";
       default:
-        return "/images/icon-fog.webp";
+        return "/weather-app/images/icon-fog.webp";
     }
   };
 

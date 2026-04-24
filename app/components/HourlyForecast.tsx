@@ -57,7 +57,7 @@ export default function HourlyForecast({ data }: HourlyForecastProps) {
           >
             <div className="flex items-center gap-4">
               <img
-                src={`/images/${item.icon}`}
+                src={`/weather-app/images/${item.icon}`}
                 alt=""
                 className="w-8 h-8 md:w-10 md:h-10 drop-shadow-md group-hover:scale-110 transition-transform"
               />
