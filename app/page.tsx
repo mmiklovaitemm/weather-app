@@ -104,25 +104,14 @@ export default function Home() {
     <main className="max-w-[1280px] mx-auto px-4 md:px-6 py-6 md:py-10 flex flex-col gap-8 md:gap-10 overflow-x-hidden">
       <Header unit={unit} onUnitChange={toggleUnit} />
 
-      <SearchBar onSearch={(city) => handleSearch(city)} loading={loading} />
+      <SearchBar
+        onSearch={(city) => handleSearch(city)}
+        loading={loading}
+        error={error}
+      />
 
       <AnimatePresence mode="wait">
-        {error ? (
-          <motion.div
-            key="error"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="text-center py-20 text-red-400 font-medium bg-brand-card rounded-3xl border border-brand-border px-6 mx-2"
-          >
-            <p>{error}</p>
-            <button
-              onClick={() => handleSearch("London")}
-              className="block mx-auto mt-4 text-brand-blue hover:text-brand-blue-dark underline text-sm transition-colors"
-            >
-              Show weather for London instead
-            </button>
-          </motion.div>
-        ) : (
+        {weatherData && (
           <motion.div
             key="content"
             variants={containerVariants}
