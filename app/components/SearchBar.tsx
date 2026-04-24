@@ -16,6 +16,7 @@ export default function SearchBar({
 }: SearchBarProps) {
   const [query, setQuery] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [isUserSearching, setIsUserSearching] = useState(false); // Naujas flag'as
   const containerRef = useRef<HTMLDivElement>(null);
 
   const suggestions = ["London", "New York", "Tokyo", "Paris"];
@@ -36,6 +37,7 @@ export default function SearchBar({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
+      setIsUserSearching(true);
       onSearch(query.trim());
       setShowSuggestions(false);
       (document.activeElement as HTMLElement)?.blur();
@@ -44,7 +46,7 @@ export default function SearchBar({
 
   return (
     <section
-      className="flex flex-col items-center w-full px-1 relative z-50"
+      className="flex flex-col items-center w-full px-1 relative z-[60]"
       ref={containerRef}
     >
       <motion.form
@@ -69,14 +71,13 @@ export default function SearchBar({
             className="absolute left-3 md:left-5 top-1/2 -translate-y-1/2 w-5 h-5 md:w-6 md:h-6 opacity-40 group-focus-within:opacity-100 transition-opacity"
           />
 
-          {/* CITY SUGGESTIONS DROPDOWN */}
           <AnimatePresence>
             {showSuggestions && !loading && (
               <motion.div
                 initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 5 }}
-                className="absolute top-[110%] left-0 w-full bg-[#21212c] border border-brand-border rounded-2xl overflow-hidden shadow-2xl"
+                className="absolute top-[110%] left-0 w-full bg-[#21212c] border border-brand-border rounded-2xl overflow-hidden shadow-2xl z-[70]"
               >
                 {suggestions.map((city) => (
                   <button
@@ -84,6 +85,7 @@ export default function SearchBar({
                     type="button"
                     onClick={() => {
                       setQuery(city);
+                      setIsUserSearching(true);
                       onSearch(city);
                       setShowSuggestions(false);
                     }}
@@ -110,16 +112,16 @@ export default function SearchBar({
         </motion.button>
       </motion.form>
 
-      {/* SEARCH PROGRESS / ERROR */}
       <div className="w-full max-w-[700px] relative">
         <AnimatePresence mode="wait">
-          {loading ? (
+          {/* Rodyti tik tada, kai vartotojas paspaudė paiešką */}
+          {loading && isUserSearching ? (
             <motion.div
               key="loading-dropdown"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="absolute top-0 mt-2 w-full bg-[#21212c] border border-brand-border rounded-xl p-3 flex items-center gap-3 shadow-2xl"
+              className="absolute top-0 mt-2 w-full bg-[#21212c] border border-brand-border rounded-xl p-3 flex items-center gap-3 shadow-2xl z-[65]"
             >
               <img
                 src="/weather-app/images/icon-loading.svg"

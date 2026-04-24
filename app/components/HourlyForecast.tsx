@@ -11,9 +11,8 @@ interface HourlyForecastProps {
 
 export default function HourlyForecast({ data, loading }: HourlyForecastProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedDay, setSelectedDay] = useState(
-    new Date().toLocaleDateString("en-US", { weekday: "long" }),
-  );
+  const todayName = new Date().toLocaleDateString("en-US", { weekday: "long" });
+  const [selectedDay, setSelectedDay] = useState(todayName);
 
   const isDataLoading = loading || !data;
   const daysOfWeek = [
@@ -45,26 +44,45 @@ export default function HourlyForecast({ data, loading }: HourlyForecastProps) {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function formatItem(item: any) {
+    return {
+      time: new Date(item.dt * 1000).toLocaleTimeString("en-US", {
+        hour: "numeric",
+        hour12: true,
+      }),
+      temp: `${Math.round(item.main.temp)}°`,
+      icon: getWeatherIcon(item.weather[0].main),
+    };
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const filteredHours = isDataLoading
     ? Array(8).fill(null)
     : data.list
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        .filter((item: any) => {
-          const itemDay = new Date(item.dt * 1000).toLocaleDateString("en-US", {
-            weekday: "long",
-          });
-          return itemDay === selectedDay;
-        })
-        .slice(0, 8)
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        .map((item: any) => ({
-          time: new Date(item.dt * 1000).toLocaleTimeString("en-US", {
-            hour: "numeric",
-            hour12: true,
-          }),
-          temp: `${Math.round(item.main.temp)}°`,
-          icon: getWeatherIcon(item.weather[0].main),
-        }));
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          .filter((item: any) => {
+            const itemDate = new Date(item.dt * 1000);
+            const itemDay = itemDate.toLocaleDateString("en-US", {
+              weekday: "long",
+            });
+            return itemDay === selectedDay;
+          }).length < 5 && selectedDay === todayName
+      ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        data.list.slice(0, 8).map((item: any) => formatItem(item))
+      : data.list
+          .filter(
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (item: any) =>
+              new Date(item.dt * 1000).toLocaleDateString("en-US", {
+                weekday: "long",
+              }) === selectedDay,
+          )
+          .slice(0, 8)
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          .map((item: any) => formatItem(item));
+
+  const hours = isDataLoading ? Array(8).fill(null) : filteredHours;
 
   return (
     <aside className="bg-brand-card border border-brand-border rounded-[32px] md:rounded-[40px] p-6 md:p-8 flex flex-col h-full w-full relative">
@@ -73,7 +91,6 @@ export default function HourlyForecast({ data, loading }: HourlyForecastProps) {
           Hourly forecast
         </h3>
 
-        {/* DAY SELECTOR DROPDOWN */}
         <div className="relative">
           <button
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -103,11 +120,7 @@ export default function HourlyForecast({ data, loading }: HourlyForecastProps) {
                       setSelectedDay(day);
                       setIsDropdownOpen(false);
                     }}
-                    className={`w-full text-left px-4 py-2 text-xs font-medium transition-colors ${
-                      selectedDay === day
-                        ? "text-brand-white bg-brand-blue/20"
-                        : "text-brand-muted hover:text-brand-white hover:bg-brand-border/30"
-                    }`}
+                    className={`w-full text-left px-4 py-2 text-xs font-medium transition-colors ${selectedDay === day ? "text-brand-white bg-brand-blue/20" : "text-brand-muted hover:text-brand-white hover:bg-brand-border/30"}`}
                   >
                     {day}
                   </button>
@@ -118,12 +131,12 @@ export default function HourlyForecast({ data, loading }: HourlyForecastProps) {
         </div>
       </div>
 
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 flex-1 h-full">
         {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-        {filteredHours.map((item: any, index: number) => (
+        {hours.map((item: any, index: number) => (
           <div
             key={index}
-            className={`flex items-center justify-between py-3 px-5 rounded-[20px] bg-brand-dark/40 border border-brand-border/20 ${isDataLoading ? "animate-pulse opacity-40" : ""}`}
+            className={`flex items-center justify-between py-5 px-5 rounded-[20px] bg-brand-dark/40 border border-brand-border/20 flex-1 ${isDataLoading ? "animate-pulse opacity-40" : ""}`}
           >
             {isDataLoading || !item ? (
               <div className="w-full h-8 bg-brand-muted/10 rounded-lg" />
@@ -146,11 +159,6 @@ export default function HourlyForecast({ data, loading }: HourlyForecastProps) {
             )}
           </div>
         ))}
-        {!isDataLoading && filteredHours.length === 0 && (
-          <p className="text-center text-brand-muted text-xs py-10">
-            No data available for this day.
-          </p>
-        )}
       </div>
     </aside>
   );
