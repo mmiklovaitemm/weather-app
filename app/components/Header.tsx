@@ -84,17 +84,15 @@ export default function Header({ unit, onUnitChange }: HeaderProps) {
                       className={`flex justify-between items-center py-2 px-2 cursor-pointer transition-colors rounded-lg -mx-2 ${
                         unit === "metric"
                           ? "text-brand-white bg-brand-border/10"
-                          : "text-brand-muted hover:text-brand-white hover:bg-brand-border/20"
+                          : "text-brand-muted hover:text-brand-white"
                       }`}
                     >
                       <span>Celsius (°C)</span>
                       {unit === "metric" && (
-                        <motion.img
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
+                        <img
                           src="/weather-app/images/icon-checkmark.svg"
-                          alt=""
                           className="w-4 h-4"
+                          alt=""
                         />
                       )}
                     </div>
@@ -103,17 +101,15 @@ export default function Header({ unit, onUnitChange }: HeaderProps) {
                       className={`flex justify-between items-center py-2 px-2 cursor-pointer transition-colors rounded-lg -mx-2 ${
                         unit === "imperial"
                           ? "text-brand-white bg-brand-border/10"
-                          : "text-brand-muted hover:text-brand-white hover:bg-brand-border/20"
+                          : "text-brand-muted hover:text-brand-white"
                       }`}
                     >
                       <span>Fahrenheit (°F)</span>
                       {unit === "imperial" && (
-                        <motion.img
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
+                        <img
                           src="/weather-app/images/icon-checkmark.svg"
-                          alt=""
                           className="w-4 h-4"
+                          alt=""
                         />
                       )}
                     </div>
@@ -130,39 +126,64 @@ export default function Header({ unit, onUnitChange }: HeaderProps) {
                   <div className="flex flex-col gap-1 text-xs md:text-sm">
                     <div
                       onClick={() => handleUnitSelect("metric")}
-                      className={`flex justify-between items-center py-2 px-2 cursor-pointer transition-colors rounded-lg -mx-2 ${
-                        unit === "metric"
-                          ? "text-brand-white"
-                          : "text-brand-muted hover:text-brand-white"
-                      }`}
+                      className={`flex justify-between items-center py-2 px-2 cursor-pointer rounded-lg -mx-2 ${unit === "metric" ? "text-brand-white" : "text-brand-muted"}`}
                     >
                       <span>km/h</span>
                       {unit === "metric" && (
-                        <motion.img
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
+                        <img
                           src="/weather-app/images/icon-checkmark.svg"
-                          alt=""
                           className="w-4 h-4"
+                          alt=""
                         />
                       )}
                     </div>
                     <div
                       onClick={() => handleUnitSelect("imperial")}
-                      className={`flex justify-between items-center py-2 px-2 cursor-pointer transition-colors rounded-lg -mx-2 ${
-                        unit === "imperial"
-                          ? "text-brand-white"
-                          : "text-brand-muted hover:text-brand-white"
-                      }`}
+                      className={`flex justify-between items-center py-2 px-2 cursor-pointer rounded-lg -mx-2 ${unit === "imperial" ? "text-brand-white" : "text-brand-muted"}`}
                     >
                       <span>mph</span>
                       {unit === "imperial" && (
-                        <motion.img
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
+                        <img
                           src="/weather-app/images/icon-checkmark.svg"
-                          alt=""
                           className="w-4 h-4"
+                          alt=""
+                        />
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="h-[1px] bg-brand-border my-1" />
+
+                {/* Precipitation Section - PRIDĖTA */}
+                <div className="px-4 py-2">
+                  <p className="text-[10px] md:text-xs font-bold text-brand-muted uppercase tracking-wider mb-2">
+                    Precipitation
+                  </p>
+                  <div className="flex flex-col gap-1 text-xs md:text-sm">
+                    <div
+                      onClick={() => handleUnitSelect("metric")}
+                      className={`flex justify-between items-center py-2 px-2 cursor-pointer rounded-lg -mx-2 ${unit === "metric" ? "text-brand-white" : "text-brand-muted"}`}
+                    >
+                      <span>Millimeters (mm)</span>
+                      {unit === "metric" && (
+                        <img
+                          src="/weather-app/images/icon-checkmark.svg"
+                          className="w-4 h-4"
+                          alt=""
+                        />
+                      )}
+                    </div>
+                    <div
+                      onClick={() => handleUnitSelect("imperial")}
+                      className={`flex justify-between items-center py-2 px-2 cursor-pointer rounded-lg -mx-2 ${unit === "imperial" ? "text-brand-white" : "text-brand-muted"}`}
+                    >
+                      <span>Inches (in)</span>
+                      {unit === "imperial" && (
+                        <img
+                          src="/weather-app/images/icon-checkmark.svg"
+                          className="w-4 h-4"
+                          alt=""
                         />
                       )}
                     </div>
@@ -174,7 +195,6 @@ export default function Header({ unit, onUnitChange }: HeaderProps) {
         </div>
       </div>
 
-      {/* Hero Title - Responsive Sizing */}
       <div className="text-center text-brand-white px-2">
         <motion.h1
           initial={{ y: -20, opacity: 0 }}

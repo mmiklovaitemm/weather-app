@@ -11,6 +11,13 @@ export default function WeatherDetails({ data, unit }: WeatherDetailsProps) {
 
   const windUnit = unit === "metric" ? "m/s" : "mph";
 
+  const precipValue = data.rain?.["1h"] || data.snow?.["1h"] || 0;
+
+  const displayPrecip =
+    unit === "metric"
+      ? `${precipValue} mm`
+      : `${(precipValue * 0.03937).toFixed(2)} in`;
+
   const details = [
     {
       label: "Feels Like",
@@ -25,8 +32,8 @@ export default function WeatherDetails({ data, unit }: WeatherDetailsProps) {
       value: `${Math.round(data.wind.speed)} ${windUnit}`,
     },
     {
-      label: "Clouds",
-      value: `${data.clouds.all}%`,
+      label: "Precipitation",
+      value: displayPrecip,
     },
   ];
 
