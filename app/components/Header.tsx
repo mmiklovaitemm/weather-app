@@ -60,7 +60,7 @@ export default function Header({ unit, onUnitChange }: HeaderProps) {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.95 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
-                className="absolute right-0 mt-3 w-56 md:w-64 bg-brand-card border border-brand-border rounded-3xl p-2 z-50 shadow-2xl origin-top-right"
+                className="absolute right-0 mt-3 w-56 md:w-64 bg-brand-card border border-brand-border rounded-3xl p-2 z-[100] shadow-[0_20px_50px_rgba(0,0,0,0.5)] origin-top-right"
               >
                 <button
                   onClick={() =>
@@ -155,7 +155,7 @@ export default function Header({ unit, onUnitChange }: HeaderProps) {
 
                 <div className="h-[1px] bg-brand-border my-1" />
 
-                {/* Precipitation Section - PRIDĖTA */}
+                {/* Precipitation Section */}
                 <div className="px-4 py-2">
                   <p className="text-[10px] md:text-xs font-bold text-brand-muted uppercase tracking-wider mb-2">
                     Precipitation
